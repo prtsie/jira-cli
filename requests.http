@@ -1,0 +1,5 @@
+@url = https://{{domain}}.atlassian.net/rest/api/3
+@authHeader = Basic {{base64String}}
+
+GET {{url}}/search
+Authorization: {{authHeader}}
