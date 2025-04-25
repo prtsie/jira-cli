@@ -3,3 +3,21 @@
 
 GET {{url}}/search
 Authorization: {{authHeader}}
+
+###
+
+POST {{url}}/issue
+Authorization: {{authHeader}}
+Content-Type: application/json
+
+{
+  "fields": {
+    "issuetype": {
+      "id": "10002"
+    },
+    "project": {
+      "id": "10000"
+    },
+    "summary": "aaa"
+  }
+}

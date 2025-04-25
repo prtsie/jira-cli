@@ -1,5 +1,6 @@
 using JiraCli.Helpers;
 using JiraCli.Models;
+using JiraCli.Models.CreateCommand;
 using JiraCli.Models.FetchCommand;
 using Microsoft.Extensions.Configuration;
 
@@ -27,6 +28,15 @@ public class JiraClient
         var response = await client.SendAsync(request);
         var parsed = await response.Parse<FetchResponse>();
         return parsed!.MapToIssuesCollection();
+    }
+
+    public async Task<CreatedIssue> CreateIssue(CreateIssueRequest request)
+    {
+        using var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{url}/issue");
+        BeforeSend(requestMessage);
+        var response = await client.SendAsync(requestMessage);
+        var parsed = await response.Parse<CreatedIssue>();
+        return parsed!;
     }
 
     private void BeforeSend(HttpRequestMessage request)
